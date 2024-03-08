@@ -21,6 +21,12 @@ const io = require('socket.io')(server, {
   }
 })
 
+// Rebuilding bcrypt module to address invalid ELF header error
+try {
+    const bcrypt = require('bcrypt');
+} catch (error) {
+    console.error('Error loading bcrypt module:', error);
+}
 
 async function getLastMessagesFromRoom(room){
   let roomMessages = await Message.aggregate([
