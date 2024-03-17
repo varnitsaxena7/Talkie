@@ -30,7 +30,7 @@ function Sidebar() {
 
     useEffect(() => {
         if (user) {
-            setCurrentRoom("general");
+            setCurrentRoom("Tech Talk");
             getRooms();
             socket.emit("join-room", "general");
             socket.emit("new-user");
