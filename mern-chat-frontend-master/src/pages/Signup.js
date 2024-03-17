@@ -18,8 +18,8 @@ function Signup() {
 
     function validateImg(e) {
         const file = e.target.files[0];
-        if (file.size >= 1048576) {
-            return alert("Max file size is 1mb");
+        if (file.size >= 10485760) {
+            return alert("Max file size is 10mb");
         } else {
             setImage(file);
             setImagePreview(URL.createObjectURL(file));
@@ -29,10 +29,10 @@ function Signup() {
     async function uploadImage() {
         const data = new FormData();
         data.append("file", image);
-        data.append("upload_preset", "your-preset-here");
+        data.append("upload_preset", "ptgwdfiv");
         try {
             setUploadingImg(true);
-            let res = await fetch("https://api.cloudinary.com/v1_1/your-username-here/image/upload", {
+            let res = await fetch("https://api.cloudinary.com/v1_1/do1bktvjm/image/upload", {
                 method: "post",
                 body: data,
             });

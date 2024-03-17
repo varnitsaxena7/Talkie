@@ -3,7 +3,7 @@ const app = express();
 const userRoutes = require('./routes/userRoutes')
 const User = require('./models/User');
 const Message = require('./models/Message')
-const rooms = ['Tech Talk','Finance Corner'];
+const rooms = ['Tech Talk','Finance Corner','Fun Corner'];
 const cors = require('cors');
 const path=require('path')
 app.use(express.urlencoded({extended: true}));
