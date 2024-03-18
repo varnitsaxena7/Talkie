@@ -67,7 +67,11 @@ function Sidebar() {
     return (
         <>
           <h2>Available rooms</h2>
+<<<<<<< HEAD
                     <ListGroup>
+=======
+        <ListGroup>
+>>>>>>> 10ab737eabf850e35f57d044fa3f8a2dd5373185
                         {rooms.map((room, idx) => (
                             <ListGroup.Item 
                                 key={idx} 
