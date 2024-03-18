@@ -25,7 +25,7 @@ function Sidebar() {
     }
 
     socket.off("notifications").on("notifications", (room) => {
-        if (currentRoom != room) dispatch(addNotifications(room));
+        if (currentRoom !== room) dispatch(addNotifications(room));
     });
 
     useEffect(() => {
@@ -67,16 +67,12 @@ function Sidebar() {
     return (
         <>
           <h2>Available rooms</h2>
-<<<<<<< HEAD
                     <ListGroup>
-=======
-        <ListGroup>
->>>>>>> 10ab737eabf850e35f57d044fa3f8a2dd5373185
                         {rooms.map((room, idx) => (
                             <ListGroup.Item 
                                 key={idx} 
                                 onClick={() => joinRoom(room)} 
-                                active={room == currentRoom} 
+                                active={room === currentRoom} 
                                 style={{ cursor: "pointer", display: "flex", justifyContent: "space-between" }}
                             >
                                 {room} {currentRoom !== room && <span className="badge rounded-pill bg-primary">{user.newMessages[room]}</span>}
@@ -85,16 +81,16 @@ function Sidebar() {
                     </ListGroup>
             <h2>Members</h2>
             {members.map((member) => (
-                <ListGroup.Item key={member.id} style={{ cursor: "pointer" }} active={privateMemberMsg?._id == member?._id} onClick={() => handlePrivateMemberMsg(member)} disabled={member._id === user._id}>
+                <ListGroup.Item key={member.id} style={{ cursor: "pointer" }} active={privateMemberMsg?._id === member?._id} onClick={() => handlePrivateMemberMsg(member)} disabled={member._id === user._id}>
                     <Row>
                         <Col xs={2} className="member-status">
                             <img src={member.picture} className="member-status-img" />
-                            {member.status == "online" ? <i className="fas fa-circle sidebar-online-status"></i> : <i className="fas fa-circle sidebar-offline-status"></i>}
+                            {member.status === "online" ? <i className="fas fa-circle sidebar-online-status"></i> : <i className="fas fa-circle sidebar-offline-status"></i>}
                         </Col>
                         <Col xs={9}>
                             {member.name}
                             {member._id === user?._id && " (You)"}
-                            {member.status == "" && ""}
+                            {member.status === "" && ""}
                         </Col>
                         <Col xs={1}>
                             <span className="badge rounded-pill bg-primary">{user.newMessages[orderIds(member._id, user._id)]}</span>
