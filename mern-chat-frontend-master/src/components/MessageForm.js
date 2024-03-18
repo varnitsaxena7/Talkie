@@ -6,7 +6,6 @@ import "./MessageForm.css";
 
 function MessageForm() {
     const [message, setMessage] = useState("");
-    const [isTyping, setIsTyping] = useState(false);
     const user = useSelector((state) => state.user);
     const { socket, currentRoom, setMessages, messages, privateMemberMsg } = useContext(AppContext);
     const messageEndRef = useRef(null);
@@ -14,16 +13,6 @@ function MessageForm() {
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
-
-    useEffect(() => {
-        const typingTimeout = setTimeout(() => {
-            setIsTyping(false);
-        }, 2000); // Timeout duration for typing indicator
-
-        return () => {
-            clearTimeout(typingTimeout);
-        };
-    }, [message]);
 
     function getFormattedDate() {
         const date = new Date();
@@ -39,16 +28,6 @@ function MessageForm() {
         const roomId = currentRoom;
         socket.emit("message-room", roomId, message, user, time, getFormattedDate());
         setMessage("");
-        setIsTyping(false);
-    }
-
-    function handleTyping(e) {
-        setMessage(e.target.value);
-        if (e.target.value) {
-            setIsTyping(true);
-        } else {
-            setIsTyping(false);
-        }
     }
 
     function scrollToBottom() {
@@ -92,7 +71,7 @@ function MessageForm() {
                 <Row>
                     <Col md={11}>
                         <Form.Group>
-                            <Form.Control type="text" placeholder="Your message" disabled={!user} value={message} onChange={handleTyping} />
+                            <Form.Control type="text" placeholder="Your message" disabled={!user} value={message} onChange={(e) => setMessage(e.target.value)} />
                         </Form.Group>
                     </Col>
                     <Col md={1}>
@@ -102,7 +81,6 @@ function MessageForm() {
                     </Col>
                 </Row>
             </Form>
-            {isTyping && <div className="typing-indicator">Someone is typing...</div>}
         </>
     );
 }
