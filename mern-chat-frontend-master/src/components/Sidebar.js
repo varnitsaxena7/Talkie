@@ -42,7 +42,11 @@ function Sidebar() {
     });
 
     function getRooms() {
-        fetch("http://localhost:5001/rooms")
+        let fid="http://localhost:5001/rooms";
+        if (process.env.NODE_ENV !== 'development') {
+    fid = "https://talkie-3.onrender.com/rooms";
+}
+        fetch(fid)
             .then((res) => res.json())
             .then((data) => setRooms(data));
     }
